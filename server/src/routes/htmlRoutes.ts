@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import weatherRouter from 'weatherRoutes';
+import weatherRouter from './api/weatherRoutes';
 import htmlRouter from './index';
 
 const app = express();
