@@ -1,10 +1,18 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { Router } from 'express';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const router = Router();
+import express from 'express';
+import path from 'path';
+import weatherRouter from 'weatherRoutes';
+import htmlRouter from './index';
 
-// TODO: Define route to serve index.html
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-export default router;
+// Middleware for parsing JSON and serving static files
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../../client')));
+
+// Use weather and HTML routes
+app.use('/api/weather', weatherRouter);
+app.use('*', htmlRouter);
+
+app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
