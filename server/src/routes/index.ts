@@ -8,3 +8,4 @@ router.use('/api', apiRoutes);
 router.use('/', htmlRoutes);
 
 export default router;
+// update the import statement to use the new file path

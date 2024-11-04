@@ -1,26 +1,23 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
-import weatherRouter from './routes/api/weatherRoutes'; // path to weatherRoutes
+import weatherRouter from './routes/api/weatherRoutes';
+import htmlRouter from './routes/htmlRoutes';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Serve static files from the client dist folder
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
-// Middleware for parsing JSON and urlencoded form data
+// Middleware for parsing JSON and serving static files
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// Use the weather router with the base path
+// Use the weather API router for API requests
 app.use('/api/weather', weatherRouter);
 
-// Catch-all route to serve index.html for any unmatched routes (for client-side routing)
-app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
-// Start the server
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`))
+// Use the HTML router for front-end routes
+app.use('*', htmlRouter);
+
+app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
