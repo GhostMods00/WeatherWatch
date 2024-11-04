@@ -69,3 +69,4 @@ class WeatherService {
     }
 }
 export default new WeatherService();
+// Path: server/dist/service/historyService.js

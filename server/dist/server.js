@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
-import weatherRouter from './routes/api/weatherRoutes';
-import htmlRouter from './routes/htmlRoutes';
+import weatherRouter from './routes/api/weatherRoutes.js';
+import htmlRouter from './routes/htmlRoutes.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
