@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import HistoryService from '../../service/historyService';
-import WeatherService from '../../service/weatherService';
+import HistoryService from '../../service/historyService.js';
+import WeatherService from '../../service/weatherService.js';
 const router = Router();
 // POST /api/weather - Fetch weather for a city and save it to search history
 router.post('/', async (req, res) => {
